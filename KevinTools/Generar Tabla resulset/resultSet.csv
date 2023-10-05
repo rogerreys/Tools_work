@@ -1,0 +1,11 @@
+sep=;
+CONSULTA 1
+"28/12/2028";"1646.85";"60";"M";"td_descripcion";
+'28/12/2028';'1646.85';'60';'M';'MES(ES)';
+
+CONSULTA 2
+"NULL";
+'null';
+
+CONSULTA 3 :SIN DATOS
+CONSULTA 3

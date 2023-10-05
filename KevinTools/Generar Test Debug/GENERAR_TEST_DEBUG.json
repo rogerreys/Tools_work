@@ -1,0 +1,247 @@
+{
+    "headers": [],
+    "params": [
+        {
+            "name": "@i_operacion",
+            "dataType": 47,
+            "ioType": 0,
+            "nullable": false,
+            "value": "I",
+            "len": 0
+        },
+        {
+            "name": "@i_operacionesA",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "0001000356,",
+            "len": 0
+        },
+        {
+            "name": "@i_toperacion",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "17",
+            "len": 0
+        },
+        {
+            "name": "@i_saldo_renovar",
+            "dataType": 60,
+            "ioType": 0,
+            "nullable": false,
+            "value": "10035000",
+            "len": 0
+        },
+        {
+            "name": "@i_plazo",
+            "dataType": 52,
+            "ioType": 0,
+            "nullable": false,
+            "value": "12",
+            "len": 0
+        },
+        {
+            "name": "@i_tplazo",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "M",
+            "len": 0
+        },
+        {
+            "name": "@i_moneda",
+            "dataType": 52,
+            "ioType": 0,
+            "nullable": false,
+            "value": "0",
+            "len": 0
+        },
+        {
+            "name": "@i_ente",
+            "dataType": 56,
+            "ioType": 0,
+            "nullable": false,
+            "value": "100000002",
+            "len": 0
+        },
+        {
+            "name": "@i_tipo_cuota",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "M",
+            "len": 0
+        },
+        {
+            "name": "@i_periodo_cap",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "1",
+            "len": 0
+        },
+        {
+            "name": "@i_periodo_int",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "1",
+            "len": 0
+        },
+        {
+            "name": "@i_dia_fijo",
+            "dataType": 47,
+            "ioType": 0,
+            "nullable": false,
+            "value": "N",
+            "len": 0
+        },
+        {
+            "name": "@i_dia_pago",
+            "dataType": 56,
+            "ioType": 0,
+            "nullable": false,
+            "value": "0",
+            "len": 0
+        },
+        {
+            "name": "@i_per_gracia_cap",
+            "dataType": 56,
+            "ioType": 0,
+            "nullable": false,
+            "value": "0",
+            "len": 0
+        },
+        {
+            "name": "@i_per_gracia_int",
+            "dataType": 56,
+            "ioType": 0,
+            "nullable": false,
+            "value": "0",
+            "len": 0
+        },
+        {
+            "name": "@i_forma_cobro_gracia",
+            "dataType": 47,
+            "ioType": 0,
+            "nullable": false,
+            "value": "S",
+            "len": 0
+        },
+        {
+            "name": "@i_tipo_renovacion",
+            "dataType": 47,
+            "ioType": 0,
+            "nullable": false,
+            "value": "R",
+            "len": 0
+        },
+        {
+            "name": "@i_capitaliza",
+            "dataType": 47,
+            "ioType": 0,
+            "nullable": false,
+            "value": "S",
+            "len": 0
+        },
+        {
+            "name": "@i_div_dist_gracia",
+            "dataType": 52,
+            "ioType": 0,
+            "nullable": false,
+            "value": "0",
+            "len": 0
+        },
+        {
+            "name": "@i_destino",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "1",
+            "len": 0
+        },
+        {
+            "name": "@i_tipo_empresa",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "0010",
+            "len": 0
+        },
+        {
+            "name": "@i_ciudad",
+            "dataType": 56,
+            "ioType": 0,
+            "nullable": false,
+            "value": "5001",
+            "len": 0
+        },
+        {
+            "name": "@i_sector",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "1",
+            "len": 0
+        },
+        {
+            "name": "@i_datosa1",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "Perfil de Riesgo|Titulo|",
+            "len": 0
+        },
+        {
+            "name": "@i_datosa2",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "A|12|",
+            "len": 0
+        },
+        {
+            "name": "@t_trn",
+            "dataType": 56,
+            "ioType": 0,
+            "nullable": false,
+            "value": "77501",
+            "len": 0
+        },
+        {
+            "name": "@o_banco_generado",
+            "dataType": 39,
+            "ioType": 1,
+            "nullable": true,
+            "value": "",
+            "len": 0
+        },
+        {
+            "name": "@o_tramite_generado",
+            "dataType": 56,
+            "ioType": 1,
+            "nullable": false,
+            "value": "0",
+            "len": 0
+        },
+        {
+            "name": "@i_requestId",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "e2464fc7-e86f-4096-b49f-801edc33bc40",
+            "len": 0
+        },
+        {
+            "name": "@t_traceId",
+            "dataType": 39,
+            "ioType": 0,
+            "nullable": false,
+            "value": "d10d29f4-e442-403e-8052-cb86e8cc98d8",
+            "len": 0
+        }
+    ],
+    "spName": "cob_cartera..sp_crea_renovacion",
+    "token": "****v0pMtg"
+}
