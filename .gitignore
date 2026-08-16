@@ -1,3 +1,4 @@
+# === Carpetas Específicas del Proyecto ===
 Tuneles/*
 SqlDbxPro_3_60/*
 LOGS_CTS_COBIS/*
@@ -6,3 +7,97 @@ KevinTools/Migrar Datos de una BDD a otra BDD/ScriptsGenerados/*
 JSON QUERIES/JSON Resulset/env/*
 KevinTools/Generar Tabla resulset/logs/*
 KevinTools/Migrar Datos de una BDD a otra BDD/logs/*
+logtoquery/logs/*
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === Entorno Virtual ===
+.venv/
+venv/
+ENV/
+env/
+.env
+.env.local
+.env.*.local
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+*.code-workspace
+
+# === Testing ===
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# === Archivos de Logs ===
+logs/
+*.log
+*.log.*
+
+# === Archivos Temporales ===
+*.tmp
+*.bak
+*.orig
+*.rej
+.~*
+
+# === Archivos de Resultado/Output ===
+result*.txt
+result_bu.txt
+input_bu.txt
+*.csv
+*.xlsx
+output/
+temp/
+
+# === Notebooks ===
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# === Pycache ===
+.pytest_cache/
+.mypy_cache/
+
+# === Otros ===
+.git/
+*.pyc
+.pytest_cache/
+.mypy.ini
+.pylintrc
