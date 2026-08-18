@@ -101,3 +101,8 @@ temp/
 .pytest_cache/
 .mypy.ini
 .pylintrc
+
+# === migration ====
+migracion/__pycache__/
+migracion/v1.5.1/scriptAutoGenerados/.*
+migracion/v1.5.1/scriptAutoGenerados

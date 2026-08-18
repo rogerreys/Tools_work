@@ -1,0 +1,1 @@
+java -jar ../Tools.jar -m -pathConf ./ToolsDataBase.json -confVersion v2
