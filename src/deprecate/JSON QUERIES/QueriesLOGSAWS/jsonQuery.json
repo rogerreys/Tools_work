@@ -1,0 +1,2 @@
+{"sql":"SELECT op_operacion as operacion FROM cob_cartera.ca_operacion , cob_cartera.ca_estado  WHERE (op_estado = es_codigo AND (es_procesa = 'S' OR op_estado = ? OR op_estado = ? OR op_estado = ?) AND op_fecha_ini <= ? AND op_operacion NOT  IN((SELECT do_operacion FROM tempdb._operaciones_existentes  WHERE (do_operacion is  NOT null))))", 
+"prms": [4, 10, 11, "2023-10-04 00:00:00"] }
