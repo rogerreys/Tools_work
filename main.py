@@ -4,9 +4,9 @@ from typing import Optional, List
 import sys
 import os
 
-from filesequals import FileEquals  
-from logtoquery import main
-from migracion import migrate_operations
+from src.tools.filesequals import FileEquals  
+from src.tools.logtoquery import main
+from src.tools.migracion import migrate_operations
 from src.resource import migration as rs_migration
 
 

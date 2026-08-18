@@ -8,6 +8,7 @@ JSON QUERIES/JSON Resulset/env/*
 KevinTools/Generar Tabla resulset/logs/*
 KevinTools/Migrar Datos de una BDD a otra BDD/logs/*
 logtoquery/logs/*
+*.ipynb
 
 # === Python ===
 __pycache__/
@@ -103,6 +104,7 @@ temp/
 .pylintrc
 
 # === migration ====
-migracion/__pycache__/
-migracion/v1.5.1/scriptAutoGenerados/.*
-migracion/v1.5.1/scriptAutoGenerados
+src/tools/migracion/__pycache__/
+src/tools/migracion/v1.5.1/scriptAutoGenerados/.*
+src/tools/migracion/v1.5.1/scriptAutoGenerados
+src/tools/migracion/v1.5.1/scriptAutoGenerados/

@@ -1,0 +1,16 @@
+# Dependencias para la API de Migración de Operaciones
+
+# Framework FastAPI
+fastapi>=0.104.0
+
+# Servidor ASGI
+uvicorn[standard]>=0.24.0
+
+# Validación de datos
+pydantic>=2.4.0
+
+# Cliente HTTP (para ejemplos y pruebas)
+requests>=2.31.0
+
+# Opcional: para producción con múltiples workers
+gunicorn>=21.2.0
