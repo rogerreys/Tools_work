@@ -1,0 +1,1 @@
+java -jar ../Tools.jar -m -i CopyData.sql -ipOrigin 10.5.109.37 -ipDestination localhost -portOrigin 3306 -portDestination 33060 -userOrigen lector -userDestination root -passwordOrigin xl8xxvZ9W -passwordDestination rootpw
