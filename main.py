@@ -10,7 +10,7 @@ from src.tools.filesequals import FileEquals
 from src.tools.logtoquery import main
 from src.tools.migracion import migrate_operations
 from src.resource import migration as rs_migration
-from src.sharefiles import share_files
+from src.tools.sharefiles import share_files
 
 
 # Agregar raíz del proyecto a sys.path para importaciones correctas
