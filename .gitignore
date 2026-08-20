@@ -104,8 +104,8 @@ temp/
 .pylintrc
 
 # === sharefiles ====
-src/sharefiles/resource/*
-!src/sharefiles/resource/.gitkeep
+src/tools/sharefiles/sharesdoc/*
+!src/tools/sharefiles/sharesdoc/.gitkeep
 
 # === migration ====
 src/tools/migracion/__pycache__/

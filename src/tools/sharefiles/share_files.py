@@ -15,7 +15,7 @@ from fastapi import UploadFile
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)
 
-RESOURCE_DIR = Path(__file__).resolve().parent / "resource"
+RESOURCE_DIR = Path(__file__).resolve().parent / "sharesdoc"
 
 
 def guardar_archivo(archivo: UploadFile) -> dict:
