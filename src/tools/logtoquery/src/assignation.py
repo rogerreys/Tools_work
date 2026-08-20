@@ -5,8 +5,10 @@ from .logger import get_logger
 from .exceptions import QueryAssignationException, ParameterParsingException
 
 logger = get_logger(__name__)
-patron_fecha = re.compile(r'^\d{4}-\d{2}-\d{2}(\s\d{2}:\d{2}:\d{2})?$')
 
+# Patrones compilados una sola vez a nivel de módulo (no en cada llamada)
+_RE_FECHA = re.compile(r'^\d{4}-\d{2}-\d{2}(\s\d{2}:\d{2}:\d{2})?$')
+_RE_PLACEHOLDER = re.compile(r'\?')
 
 
 class Assignation:
@@ -15,57 +17,53 @@ class Assignation:
     def assignation_values(sql, prms):
         """
         Asigna valores de parámetros a una consulta SQL con placeholders (?)
-        
+
         Args:
-            data (dict): Diccionario con estructura {"sql": "QUERY", "prms": "val,0,val2,..."}
-            
+            sql (str): Consulta SQL con placeholders '?'
+            prms (list): Lista de valores a asignar en orden
+
         Returns:
             str: Consulta SQL formateada con valores asignados
-            
+
         Raises:
             QueryAssignationException: Si hay error en la asignación de valores
-            ParameterParsingException: Si hay error al parsear parámetros
         """
         try:
             logger.debug(f"Iniciando asignación de valores. SQL: {sql[:100]}...")
-            
-            # Validación de entrada
+
             if not isinstance(prms, list):
                 logger.error(f"Datos de entrada no es una lista: {type(prms)}")
                 raise QueryAssignationException("Los datos de entrada deben ser un diccionario")
-            
+
             if not sql or not prms:
                 logger.error("Faltan campos 'sql' o 'prms' en los datos de entrada")
                 raise QueryAssignationException("Faltan campos 'sql' o 'prms'")
-            
-            # FORMATO: {"sql":"QUERY", "prms":["val", 0, "val2", ....]}
-            copy, i = "", 0
-            sql_query = sql
-            
-            for x in sql_query:
-                if x == "?":
-                    if i >= len(prms):
-                        logger.error(f"Índice de parámetro {i} fuera de rango. Total parámetros: {len(prms)}")
-                        raise QueryAssignationException(f"Índice de parámetro fuera de rango: {i}")
-                    
-                    param_value = prms[i]
-                    
-                    if param_value == 'null':
-                        x = 'NULL'
-                        logger.debug(f"Parámetro {i}: NULL")
-                    elif not Utils.is_number(str(param_value)):
-                        x = f"'{param_value}'"
-                        logger.debug(f"Parámetro {i}: '{param_value}' (string)")
-                    else:
-                        x = str(param_value)
-                        logger.debug(f"Parámetro {i}: {param_value} (número)")
-                    i += 1
-                
-                copy += x
-            
-            logger.info(f"Asignación completada exitosamente. Query formateada: {copy[:100]}...")
+
+            # Sustitución vía re.sub (motor en C) en lugar de recorrer la
+            # consulta carácter a carácter en Python: para consultas de
+            # miles de caracteres (frecuente en estos logs) esto reduce el
+            # trabajo a O(nº de '?'), no O(longitud del SQL).
+            total = len(prms)
+            it = iter(prms)
+
+            def _replace(_match):
+                try:
+                    value = next(it)
+                except StopIteration:
+                    logger.error(f"Índice de parámetro fuera de rango. Total parámetros: {total}")
+                    raise QueryAssignationException("Índice de parámetro fuera de rango")
+
+                if value == 'null':
+                    return 'NULL'
+                if Utils.is_number(value):
+                    return str(value)
+                return f"'{value}'"
+
+            copy = _RE_PLACEHOLDER.sub(_replace, sql)
+
+            logger.debug(f"Asignación completada. Query formateada: {copy[:100]}...")
             return copy
-            
+
         except (QueryAssignationException, ParameterParsingException):
             raise
         except Exception as e:
@@ -78,12 +76,11 @@ class Assignation:
             return prm  # ya viene tipado, no se toca
 
         if isinstance(prm, str):
-            partes = [p.strip() for p in prm.split(",")]
             resultado = []
-            for p in partes:
+            for p in (parte.strip() for parte in prm.split(",")):
                 if p.lower() == 'null':
                     resultado.append('null')
-                elif patron_fecha.match(p):
+                elif _RE_FECHA.match(p):
                     resultado.append(p)  # fecha, se mantiene como string
                 else:
                     try:

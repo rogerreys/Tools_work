@@ -1,3 +1,4 @@
+import time
 from .src.assignation import Assignation
 from .src.relogs import Relogs
 from .src.logger import get_logger
@@ -24,15 +25,14 @@ def run(logs: str) -> str:
     Raises:
         LogToQueryException: Si hay error en el procesamiento
     """
+    inicio = time.perf_counter()
     try:
-        logger.info("=" * 60)
         logger.info("Ejecución de programa main logtoquery")
-        logger.info("=" * 60)
-        
+
         if not logs or not logs.strip():
             logger.error("Logs vacío o None recibido en main")
             raise InvalidLogFormatException("Los logs no pueden estar vacíos")
-        
+
         logger.debug(f"Inicializando Relogs con {len(logs)} caracteres")
         relogs = Relogs(logs)
         data = []
@@ -44,20 +44,13 @@ def run(logs: str) -> str:
         logger.info("Formateando consultas...")
         for idx, i in enumerate(resp):
             try:
-                if type(i[0]) == tuple:
-                    query, prm = i[0]
-                    logger.debug(f"Item {idx}: Procesando query con parámetros")
+                item = i[0]
+                if isinstance(item, tuple):
+                    query, prm = item
                     prm = Assignation.convertir_prm(prm)
-
-                    formatted_sql = Assignation.assignation_values(
-                        query,
-                        prm
-                    )
-                    data.append(formatted_sql)
-                    logger.debug(f"Query {idx} formateada exitosamente")
+                    data.append(Assignation.assignation_values(query, prm))
                 else:
-                    logger.debug(f"Item {idx}: Procesando query sin parámetros")
-                    data.append(i[0])
+                    data.append(item)
             except (QueryFormattingException, LogToQueryException) as e:
                 logger.error(f"Error formateando query {idx}: {str(e)}")
                 raise
@@ -66,7 +59,8 @@ def run(logs: str) -> str:
                 raise QueryFormattingException(f"Error formateando query: {str(e)}")
 
         result = "\n".join(data)
-        logger.info(f"Procesamiento completado exitosamente. {len(data)} consultas generadas")
+        tiempo_total = time.perf_counter() - inicio
+        logger.info(f"Procesamiento completado exitosamente. {len(data)} consultas generadas en {tiempo_total:.3f} seg")
         logger.info("=" * 60)
         return result
         
