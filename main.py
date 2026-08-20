@@ -3,11 +3,14 @@ from fastapi import FastAPI, UploadFile, HTTPException, Body, Response, status
 from typing import Optional, List
 import sys
 import os
+import platform
+import socket
 
-from src.tools.filesequals import FileEquals  
+from src.tools.filesequals import FileEquals
 from src.tools.logtoquery import main
 from src.tools.migracion import migrate_operations
 from src.resource import migration as rs_migration
+from src.sharefiles import share_files
 
 
 # Agregar raíz del proyecto a sys.path para importaciones correctas
@@ -15,7 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Crear app de FastAPI (variable renombrada para evitar conflicto)
 app = FastAPI(
-    title="API de Herramients de Operaciones",
+    title=f'API de Herramients de Operaciones | { platform.system() }( { socket.gethostname() } )',
     description="API REST para automatizar herramientas",
     version="1.0.0",
     docs_url="/docs",
@@ -35,6 +38,7 @@ async def read_root():
             "logtoquery": "/logtoquery",
             "migrate": "/migrate",
             "preview": "/migrate/preview",
+            "sharefiles": "/sharefiles/upload",
             "health": "/health",
             "docs": "/docs"
         }
@@ -51,6 +55,22 @@ async def read_tool(file1: UploadFile, file2: UploadFile, output_file:Optional[s
     if not file1 or not file2:
         return {"error": "Both file1 and file2 must be provided."}
     return {"data": FileEquals.main(file1, file2, output_file)}
+
+@app.post("/sharefiles/upload",
+    tags=["ShareFiles"],
+    name="Subir Archivo",
+    summary="Sube un archivo a la carpeta resource local",
+    description="Guarda el archivo recibido en src/sharefiles/resource, en la máquina donde esté corriendo este servicio. Si ya existe un archivo con el mismo nombre, se sobrescribe.",
+    status_code=status.HTTP_201_CREATED)
+async def upload_file(file: UploadFile):
+    if not file:
+        raise HTTPException(status_code=400, detail="Debe proporcionar un archivo")
+    try:
+        return {"data": share_files.main(file)}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error guardando archivo: {str(e)}")
 
 @app.post("/logtoquery",
     tags=["LogtoQuery"],

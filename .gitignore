@@ -103,6 +103,10 @@ temp/
 .mypy.ini
 .pylintrc
 
+# === sharefiles ====
+src/sharefiles/resource/*
+!src/sharefiles/resource/.gitkeep
+
 # === migration ====
 src/tools/migracion/__pycache__/
 src/tools/migracion/v1.5.1/scriptAutoGenerados/.*
