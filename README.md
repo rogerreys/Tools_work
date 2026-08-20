@@ -18,35 +18,66 @@
 
 ## 🚀 Inicio Rápido
 
-### Crear el Entorno Virtual
+### Windows: Crear el Entorno Virtual
 
 ```bash
 # Crear carpeta .venv
 uv venv
 
-# Activar el entorno (Windows, PowerShell)
+# Activar el entorno en Windows (PowerShell)
 .venv\Scripts\Activate.ps1
 
-# Activar el entorno (Windows, cmd)
+# Activar el entorno en Windows (cmd)
 .venv\Scripts\activate.bat
+```
 
-# Activar el entorno (Linux/macOS)
+### Linux/macOS: Crear el Entorno Virtual
+
+```bash
+# Ubuntu/Debian: instalar Python, pip y soporte para entornos virtuales
+sudo apt update
+sudo apt install -y python3 python3-venv python3-pip
+
+# Crear el entorno virtual
+python3 -m venv .venv
+
+# Activar el entorno
 source .venv/bin/activate
 ```
 
-### Instalar Dependencias
+### Windows: Instalar Dependencias
 
 ```bash
 # Instalar desde requirements.txt
 uv pip install -r requirements.txt
 ```
 
-### Levantar el Servicio
+### Linux/macOS: Instalar Dependencias
+
+```bash
+# Actualizar pip
+python -m pip install --upgrade pip
+
+# Instalar desde requirements.txt
+pip install -r requirements.txt
+```
+
+### Windows/Linux/macOS: Levantar el Servicio
 
 ```bash
 # Iniciar servidor con auto-reload
 uvicorn main:app --reload
 ```
+
+También puedes iniciar el servicio directamente con Python:
+
+```bash
+python main.py
+```
+
+La API estará disponible en `http://localhost:8000` y la documentación Swagger en `http://localhost:8000/docs`.
+
+> Nota para Linux: los archivos `.bat` usados por el proceso de migración son específicos de Windows. Para ejecutar las migraciones en Ubuntu se necesitan scripts `.sh` equivalentes o ejecutar directamente el proceso Java.
 
 ---
 
@@ -59,13 +90,17 @@ Tools_work/
 ├── main.py                      # Punto de entrada FastAPI
 ├── ACH/                        # Procesamiento ACH
 ├── filesequals/                # Comparación de archivos
+├── sharefiles/                  # Compartir archivos entre máquinas
 ├── JSON QUERIES/               # Procesamiento de queries JSON
 ├── KevinTools/                 # Herramientas varias
 ├── logtoquery/                 # Sistema de logging y queries
 ├── migracion/                  # Sistema de migración de operaciones
 └── src/
-    └── resource/
-        └── migration.py        # Modelos Pydantic
+    ├── resource/
+    │   └── migration.py        # Modelos Pydantic
+    └── sharefiles/
+        ├── share_files.py      # Lógica de guardado de archivos
+        └── resource/            # Archivos subidos (local a cada máquina, no versionado)
 ```
 
 ---
